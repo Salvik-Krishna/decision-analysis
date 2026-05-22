@@ -1,0 +1,34 @@
+{
+  "simulation": {
+    "cycles": 8,
+    "seed": 12
+  },
+  "organization": {
+    "model": "ai_assisted_hierarchy",
+    "hierarchy_depth": 4,
+    "authority_concentration": 0.7,
+    "decentralization_index": 0.3
+  },
+  "environment": {
+    "market": {
+      "demand_volatility": 0.6,
+      "competition_intensity": 0.7,
+      "market_shocks": 0.4
+    },
+    "stress": {
+      "crisis_events": 0.2,
+      "misinformation_environments": 0.4
+    }
+  },
+  "incentives": {
+    "profit": 0.7,
+    "ethical": 0.4,
+    "metric_optimization": 0.6,
+    "short_term_focus": 0.6
+  },
+  "alignment": {
+    "human_human_alignment": 0.55,
+    "human_ai_alignment": 0.5,
+    "dependency_risk": 0.4
+  }
+}
