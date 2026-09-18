@@ -428,13 +428,14 @@ function updateTypingText(msg) {
 
 // ── Parse state from assistant text ──────────────────────────────────────
 function tryParseState(text) {
+  // Allow for markdown like **info_quality:** 0.60
   const fields = {
-    info_quality: /info_quality\s*[:\=]\s*([\d.]+)/i,
-    adaptability: /adaptability\s*[:\=]\s*([\d.]+)/i,
-    authority_concentration: /authority_concentration\s*[:\=]\s*([\d.]+)/i,
-    alignment: /alignment\s*[:\=]\s*([\d.]+)/i,
-    constraint_capacity: /constraint_capacity\s*[:\=]\s*([\d.]+)/i,
-    environment_pressure: /environment_pressure\s*[:\=]\s*([\d.]+)/i,
+    info_quality: /\binfo_quality\b[^0-9]*([\d.]+)/i,
+    adaptability: /\badaptability\b[^0-9]*([\d.]+)/i,
+    authority_concentration: /\bauthority_concentration\b[^0-9]*([\d.]+)/i,
+    alignment: /\balignment\b[^0-9]*([\d.]+)/i,
+    constraint_capacity: /\bconstraint_capacity\b[^0-9]*([\d.]+)/i,
+    environment_pressure: /\benvironment_pressure\b[^0-9]*([\d.]+)/i,
   };
   let found = 0;
   const s = {};
@@ -448,14 +449,17 @@ function tryParseState(text) {
 
 // ── Parse options from assistant text ────────────────────────────────────
 function tryParseOptions(text) {
-  // Look for numbered or lettered options
   const lines = text.split('\n');
   const opts = [];
   for (const line of lines) {
-    const m = line.match(/^[\s]*[A-C1-3][.)]\s+(.+)/);
-    if (m) opts.push(m[1].trim());
+    // Match "Option A: text", "**Option A:**", "A. text", "A) text"
+    const m = line.match(/(?:\*+\s*)?(?:\*\*)?(?:Option\s+)?([A-C])[.):\s]+\*?\*?\s*([^\n*]{4,})/i);
+    if (m) {
+      const label = m[1].toUpperCase() + '. ' + m[2].trim().replace(/\*+$/, '').replace(/\s+/g, ' ').trim();
+      if (!opts.find(o => o[0] === label[0])) opts.push(label);
+    }
   }
-  return opts.length >= 2 ? opts : [];
+  return opts.length >= 2 ? opts.slice(0, 4) : [];
 }
 
 // ── API call (Groq — OpenAI-compatible) with rate-limit retry ─────────────
