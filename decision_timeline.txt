@@ -1,0 +1,31 @@
+EVENT: CEO departs unexpectedly
+
+T0   info=0.50  adapt=0.55  auth=0.55  align=0.55  cap=0.50  press=0.45
+
+T1   [DECISION] Authority structure
+     CENTRALIZE
+     info=0.62  adapt=0.43  auth=0.95  align=0.73  cap=0.68  press=0.45
+
+T2   [DECISION] Information strategy
+     FULL TRANSPARENCY
+     info=0.92  adapt=0.43  auth=0.95  align=0.83  cap=0.68  press=0.57
+
+T3   [CHANCE]   Market reaction  p=0.60 / p=0.40
+     FAVORABLE
+     info=0.92  adapt=0.43  auth=0.95  align=0.89  cap=0.68  press=0.35
+
+T4   [DECISION] Response mode
+     AI-LED
+     info=1.00  adapt=0.69  auth=0.95  align=0.94  cap=0.68  press=0.35
+
+T5   [OUTCOME]
+     decision_quality   0.893
+     adaptability       0.690
+     coordination       0.625
+     ethical_stability  0.673
+     customer_sat       0.736
+     power_distrib      0.050
+     PnL (leaf)        73.99
+     E[PnL]            67.77
+     p05               58.45
+     p95               73.99

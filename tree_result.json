@@ -1,0 +1,189 @@
+{
+  "event": "CEO departs unexpectedly",
+  "situations": [
+    {
+      "situation": "A Baseline",
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "optimal_decisions": {
+        "Authority structure": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market reaction": "Favorable",
+        "Response mode": "AI-led"
+      },
+      "expected_pnl": 67.77,
+      "leaf": {
+        "decision_quality": 0.8930846296296296,
+        "organizational_adaptability": 0.6900000000000001,
+        "power_distribution": 0.04999999999999993,
+        "coordination_efficiency": 0.6249999999999999,
+        "economic_performance": 0.8098507777777778,
+        "ethical_stability": 0.6729999999999999,
+        "customer_satisfaction": 0.7359104666666666,
+        "change_in_value": 0.7398507777777777,
+        "pnl": 73.98507777777778
+      },
+      "mc_pnl": {
+        "mean": 67.8939,
+        "stdev": 7.5865,
+        "p05": 58.4463,
+        "p95": 73.9851
+      },
+      "flips_vs_baseline": []
+    },
+    {
+      "situation": "B Info vacuum",
+      "state": {
+        "info_quality": 0.15,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.35,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "optimal_decisions": {
+        "Authority structure": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market reaction": "Favorable",
+        "Response mode": "AI-led"
+      },
+      "expected_pnl": 56.681,
+      "leaf": {
+        "decision_quality": 0.7082698148148148,
+        "organizational_adaptability": 0.6900000000000001,
+        "power_distribution": 0.04999999999999993,
+        "coordination_efficiency": 0.525,
+        "economic_performance": 0.6989618888888889,
+        "ethical_stability": 0.533,
+        "customer_satisfaction": 0.6293771333333333,
+        "change_in_value": 0.6289618888888888,
+        "pnl": 62.89618888888888
+      },
+      "mc_pnl": {
+        "mean": 56.805,
+        "stdev": 7.5865,
+        "p05": 47.3574,
+        "p95": 62.8962
+      },
+      "flips_vs_baseline": []
+    },
+    {
+      "situation": "C Hostile market",
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.4,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.85
+      },
+      "optimal_decisions": {
+        "Authority structure": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market reaction": "Favorable",
+        "Response mode": "AI-led"
+      },
+      "expected_pnl": 57.107,
+      "leaf": {
+        "decision_quality": 0.6656713888888889,
+        "organizational_adaptability": 0.54,
+        "power_distribution": 0.04999999999999993,
+        "coordination_efficiency": 0.47,
+        "economic_performance": 0.6634028333333334,
+        "ethical_stability": 0.5609999999999999,
+        "customer_satisfaction": 0.5860417,
+        "change_in_value": 0.6334028333333334,
+        "pnl": 63.34028333333334
+      },
+      "mc_pnl": {
+        "mean": 57.2317,
+        "stdev": 7.6081,
+        "p05": 47.7571,
+        "p95": 63.3403
+      },
+      "flips_vs_baseline": [
+        "Info strategy: Full transparency -> Restrict information"
+      ]
+    },
+    {
+      "situation": "D Budget freeze",
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.45,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.1,
+        "environment_pressure": 0.45
+      },
+      "optimal_decisions": {
+        "Authority structure": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market reaction": "Favorable",
+        "Response mode": "AI-led"
+      },
+      "expected_pnl": 56.577,
+      "leaf": {
+        "decision_quality": 0.8710087037037036,
+        "organizational_adaptability": 0.5900000000000001,
+        "power_distribution": 0.04999999999999993,
+        "coordination_efficiency": 0.575,
+        "economic_performance": 0.6966052222222222,
+        "ethical_stability": 0.6729999999999999,
+        "customer_satisfaction": 0.6479631333333333,
+        "change_in_value": 0.6266052222222221,
+        "pnl": 62.66052222222221
+      },
+      "mc_pnl": {
+        "mean": 56.6987,
+        "stdev": 7.4253,
+        "p05": 47.4517,
+        "p95": 62.6605
+      },
+      "flips_vs_baseline": []
+    },
+    {
+      "situation": "E Strong AI backbone",
+      "state": {
+        "info_quality": 0.7,
+        "adaptability": 0.67,
+        "authority_concentration": 0.55,
+        "alignment": 0.8,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "optimal_decisions": {
+        "Authority structure": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market reaction": "Favorable",
+        "Response mode": "AI-led"
+      },
+      "expected_pnl": 81.287,
+      "leaf": {
+        "decision_quality": 0.8937037037037036,
+        "organizational_adaptability": 0.81,
+        "power_distribution": 0.04999999999999993,
+        "coordination_efficiency": 0.715,
+        "economic_performance": 0.8542222222222222,
+        "ethical_stability": 0.715,
+        "customer_satisfaction": 0.7985333333333333,
+        "change_in_value": 0.8542222222222222,
+        "pnl": 85.42222222222222
+      },
+      "mc_pnl": {
+        "mean": 81.3697,
+        "stdev": 5.0474,
+        "p05": 75.0841,
+        "p95": 85.4222
+      },
+      "flips_vs_baseline": [
+        "Info strategy: Full transparency -> Restrict information"
+      ]
+    }
+  ]
+}

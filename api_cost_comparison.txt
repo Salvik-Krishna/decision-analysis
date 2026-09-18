@@ -1,0 +1,58 @@
+================================================================================
+  LLM API COST COMPARISON  (cheapest options for a chatbot)
+  Per-turn estimate: ~1000 input tokens + 500 output tokens
+================================================================================
+
+PROVIDER        MODEL                    INPUT        OUTPUT       PER TURN   FREE TIER
+-----------     ----------------------   ----------   ----------   --------   -----------------
+Google Gemini   gemini-2.0-flash-lite    $0.075/1M    $0.30/1M     $0.00023   1,500 req/day
+Google Gemini   gemini-1.5-flash-8b      $0.038/1M    $0.15/1M     $0.00011   1,500 req/day  **CHEAPEST PAID**
+Groq            llama-3.3-70b            $0.059/1M    $0.079/1M    $0.00010   14,400 req/day **BEST FREE TIER**
+Groq            llama-3.1-8b-instant     $0.050/1M    $0.080/1M    $0.00009   14,400 req/day
+Groq            gemma2-9b                $0.020/1M    $0.020/1M    $0.00003   14,400 req/day **ABSOLUTE CHEAPEST**
+OpenAI          gpt-4.1-nano             $0.100/1M    $0.40/1M     $0.00030   none
+OpenAI          gpt-4o-mini              $0.150/1M    $0.60/1M     $0.00045   none
+Mistral         mistral-small-3.1        $0.100/1M    $0.30/1M     $0.00025   none
+Cloudflare AI   llama-3.1-8b             free         free         $0.00000   100k req/day   **TOTALLY FREE**
+Cohere          command-r7b              $0.038/1M    $0.15/1M     $0.00011   1,000 req/month (very low)
+
+================================================================================
+  MONTHLY COST AT 1,000 CASES/DAY  (~6 turns each = 6,000 req/day)
+================================================================================
+
+Google gemini-2.0-flash-lite   ~$42/month   (after free 1,500 req/day)
+Google gemini-1.5-flash-8b     ~$20/month
+Groq llama-3.1-8b              ~$4/month    (after free 14,400 req/day = mostly free!)
+Groq gemma2-9b                 ~$1/month
+OpenAI gpt-4.1-nano            ~$54/month
+Cloudflare llama-3.1-8b        FREE up to 100k req/day
+
+================================================================================
+  RECOMMENDATION FOR YOUR USE CASE
+================================================================================
+
+  Low traffic (under 250 cases/day):
+    --> Cloudflare Workers AI  (completely free, no key needed on Cloudflare)
+    --> Groq free tier         (14,400 req/day free, very fast)
+
+  Medium traffic (250-2000 cases/day):
+    --> Groq gemma2-9b         (almost free, good quality)
+    --> Google gemini-1.5-flash-8b  (reliable, very cheap)
+
+  High traffic (2000+ cases/day):
+    --> Groq gemma2-9b         ($1-5/month)
+    --> Google gemini-1.5-flash-8b  ($20-40/month)
+
+================================================================================
+  GROQ (recommended for free/cheap)
+  Get key: console.groq.com  (free, instant)
+  Endpoint: https://api.groq.com/openai/v1/chat/completions
+  Format: OpenAI-compatible (easy to switch)
+================================================================================
+
+  CLOUDFLARE WORKERS AI (totally free option)
+  No API key needed if deployed on Cloudflare Pages
+  Endpoint: via Cloudflare Worker (needs a worker script)
+  Model: @cf/meta/llama-3.1-8b-instruct
+
+================================================================================

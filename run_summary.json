@@ -1,0 +1,1442 @@
+{
+  "event": "CEO departs unexpectedly",
+  "objective": "pnl",
+  "baseline": {
+    "info_quality": 0.5,
+    "adaptability": 0.55,
+    "authority_concentration": 0.55,
+    "alignment": 0.55,
+    "constraint_capacity": 0.5,
+    "environment_pressure": 0.45
+  },
+  "scenarios": [
+    {
+      "id": 1,
+      "axis": "info",
+      "val": 0.2,
+      "state": {
+        "info_quality": 0.2,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 61.9029,
+      "leaf_metrics": {
+        "decision_quality": 0.7953,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.625,
+        "economic_performance": 0.7512,
+        "ethical_stability": 0.673,
+        "customer_satisfaction": 0.7007,
+        "change_in_value": 0.6812,
+        "pnl": 68.1184
+      },
+      "mc_pnl": {
+        "mean": 61.9837,
+        "stdev": 7.5962,
+        "p05": 52.5796,
+        "p95": 68.1184
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7953068518518518,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6249999999999999,
+            "economic_performance": 0.751184111111111,
+            "ethical_stability": 0.6729999999999999,
+            "customer_satisfaction": 0.7007104666666666,
+            "change_in_value": 0.681184111111111,
+            "pnl": 68.1184111111111
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "axis": "info",
+      "val": 0.35,
+      "state": {
+        "info_quality": 0.35,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 65.5696,
+      "leaf_metrics": {
+        "decision_quality": 0.8564,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.625,
+        "economic_performance": 0.7879,
+        "ethical_stability": 0.673,
+        "customer_satisfaction": 0.7227,
+        "change_in_value": 0.7179,
+        "pnl": 71.7851
+      },
+      "mc_pnl": {
+        "mean": 65.6504,
+        "stdev": 7.5962,
+        "p05": 56.2463,
+        "p95": 71.7851
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.8564179629629629,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6249999999999999,
+            "economic_performance": 0.7878507777777778,
+            "ethical_stability": 0.6729999999999999,
+            "customer_satisfaction": 0.7227104666666666,
+            "change_in_value": 0.7178507777777777,
+            "pnl": 71.78507777777777
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "axis": "info",
+      "val": 0.5,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 67.7696,
+      "leaf_metrics": {
+        "decision_quality": 0.8931,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.625,
+        "economic_performance": 0.8099,
+        "ethical_stability": 0.673,
+        "customer_satisfaction": 0.7359,
+        "change_in_value": 0.7399,
+        "pnl": 73.9851
+      },
+      "mc_pnl": {
+        "mean": 67.8504,
+        "stdev": 7.5962,
+        "p05": 58.4463,
+        "p95": 73.9851
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.8930846296296296,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6249999999999999,
+            "economic_performance": 0.8098507777777778,
+            "ethical_stability": 0.6729999999999999,
+            "customer_satisfaction": 0.7359104666666666,
+            "change_in_value": 0.7398507777777777,
+            "pnl": 73.98507777777778
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "axis": "info",
+      "val": 0.65,
+      "state": {
+        "info_quality": 0.65,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 71.1581,
+      "leaf_metrics": {
+        "decision_quality": 0.7689,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.545,
+        "economic_performance": 0.7553,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.6712,
+        "change_in_value": 0.7553,
+        "pnl": 75.5333
+      },
+      "mc_pnl": {
+        "mean": 71.215,
+        "stdev": 5.3472,
+        "p05": 64.5952,
+        "p95": 75.5333
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7688888888888888,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.545,
+            "economic_performance": 0.7553333333333333,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6712,
+            "change_in_value": 0.7553333333333333,
+            "pnl": 75.53333333333333
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "axis": "info",
+      "val": 0.8,
+      "state": {
+        "info_quality": 0.8,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 74.8247,
+      "leaf_metrics": {
+        "decision_quality": 0.83,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.545,
+        "economic_performance": 0.792,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.6932,
+        "change_in_value": 0.792,
+        "pnl": 79.2
+      },
+      "mc_pnl": {
+        "mean": 74.8816,
+        "stdev": 5.3472,
+        "p05": 68.2619,
+        "p95": 79.2
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.83,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.545,
+            "economic_performance": 0.7919999999999999,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6932,
+            "change_in_value": 0.7919999999999999,
+            "pnl": 79.19999999999999
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "axis": "press",
+      "val": 0.2,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.2
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 73.0501,
+      "leaf_metrics": {
+        "decision_quality": 0.8978,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.625,
+        "economic_performance": 0.8127,
+        "ethical_stability": 0.673,
+        "customer_satisfaction": 0.7376,
+        "change_in_value": 0.7927,
+        "pnl": 79.2656
+      },
+      "mc_pnl": {
+        "mean": 73.1309,
+        "stdev": 7.5962,
+        "p05": 63.7268,
+        "p95": 79.2656
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.8977596296296296,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6249999999999999,
+            "economic_performance": 0.8126557777777778,
+            "ethical_stability": 0.6729999999999999,
+            "customer_satisfaction": 0.7375934666666666,
+            "change_in_value": 0.7926557777777777,
+            "pnl": 79.26557777777778
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "axis": "press",
+      "val": 0.35,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.35
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 69.8818,
+      "leaf_metrics": {
+        "decision_quality": 0.895,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.625,
+        "economic_performance": 0.811,
+        "ethical_stability": 0.673,
+        "customer_satisfaction": 0.7366,
+        "change_in_value": 0.761,
+        "pnl": 76.0973
+      },
+      "mc_pnl": {
+        "mean": 69.9626,
+        "stdev": 7.5962,
+        "p05": 60.5585,
+        "p95": 76.0973
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.8949546296296297,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6249999999999999,
+            "economic_performance": 0.8109727777777778,
+            "ethical_stability": 0.6729999999999999,
+            "customer_satisfaction": 0.7365836666666666,
+            "change_in_value": 0.7609727777777777,
+            "pnl": 76.09727777777778
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "axis": "press",
+      "val": 0.7,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.7
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 65.6182,
+      "leaf_metrics": {
+        "decision_quality": 0.7078,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.545,
+        "economic_performance": 0.7187,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.6492,
+        "change_in_value": 0.7187,
+        "pnl": 71.8667
+      },
+      "mc_pnl": {
+        "mean": 65.6994,
+        "stdev": 7.6366,
+        "p05": 56.2454,
+        "p95": 71.8667
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7077777777777777,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.545,
+            "economic_performance": 0.7186666666666667,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6492,
+            "change_in_value": 0.7186666666666667,
+            "pnl": 71.86666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "axis": "press",
+      "val": 0.85,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.85
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 62.4251,
+      "leaf_metrics": {
+        "decision_quality": 0.7046,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.545,
+        "economic_performance": 0.7167,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.648,
+        "change_in_value": 0.6867,
+        "pnl": 68.6736
+      },
+      "mc_pnl": {
+        "mean": 62.5063,
+        "stdev": 7.6366,
+        "p05": 53.0523,
+        "p95": 68.6736
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7045602777777777,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.545,
+            "economic_performance": 0.7167361666666666,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6480417,
+            "change_in_value": 0.6867361666666666,
+            "pnl": 68.67361666666666
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "axis": "align",
+      "val": 0.25,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.25,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 61.8946,
+      "leaf_metrics": {
+        "decision_quality": 0.61,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.3979,
+        "economic_performance": 0.66,
+        "ethical_stability": 0.351,
+        "customer_satisfaction": 0.5552,
+        "change_in_value": 0.66,
+        "pnl": 66.0011
+      },
+      "mc_pnl": {
+        "mean": 61.948,
+        "stdev": 5.0187,
+        "p05": 55.7349,
+        "p95": 66.0011
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.6100177777777778,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.3978799999999999,
+            "economic_performance": 0.6600106666666666,
+            "ethical_stability": 0.3509999999999999,
+            "customer_satisfaction": 0.5551583999999999,
+            "change_in_value": 0.6600106666666666,
+            "pnl": 66.00106666666666
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "axis": "align",
+      "val": 0.4,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.4,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 64.7696,
+      "leaf_metrics": {
+        "decision_quality": 0.8431,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.55,
+        "economic_performance": 0.7799,
+        "ethical_stability": 0.568,
+        "customer_satisfaction": 0.6879,
+        "change_in_value": 0.7099,
+        "pnl": 70.9851
+      },
+      "mc_pnl": {
+        "mean": 64.8504,
+        "stdev": 7.5962,
+        "p05": 55.4463,
+        "p95": 70.9851
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.8430846296296297,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.5499999999999999,
+            "economic_performance": 0.7798507777777778,
+            "ethical_stability": 0.568,
+            "customer_satisfaction": 0.6879104666666667,
+            "change_in_value": 0.7098507777777777,
+            "pnl": 70.98507777777778
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "axis": "align",
+      "val": 0.7,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.7,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 70.4914,
+      "leaf_metrics": {
+        "decision_quality": 0.7578,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.62,
+        "economic_performance": 0.7487,
+        "ethical_stability": 0.666,
+        "customer_satisfaction": 0.6972,
+        "change_in_value": 0.7487,
+        "pnl": 74.8667
+      },
+      "mc_pnl": {
+        "mean": 70.5483,
+        "stdev": 5.3472,
+        "p05": 63.9285,
+        "p95": 74.8667
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7577777777777778,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.62,
+            "economic_performance": 0.7486666666666667,
+            "ethical_stability": 0.6659999999999999,
+            "customer_satisfaction": 0.6972,
+            "change_in_value": 0.7486666666666667,
+            "pnl": 74.86666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "axis": "align",
+      "val": 0.85,
+      "state": {
+        "info_quality": 0.5,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.85,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.45
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 72.2914,
+      "leaf_metrics": {
+        "decision_quality": 0.7811,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.655,
+        "economic_performance": 0.7627,
+        "ethical_stability": 0.715,
+        "customer_satisfaction": 0.7196,
+        "change_in_value": 0.7627,
+        "pnl": 76.2667
+      },
+      "mc_pnl": {
+        "mean": 72.3431,
+        "stdev": 4.8583,
+        "p05": 66.3285,
+        "p95": 76.2667
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7811111111111111,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6549999999999999,
+            "economic_performance": 0.7626666666666667,
+            "ethical_stability": 0.715,
+            "customer_satisfaction": 0.7196,
+            "change_in_value": 0.7626666666666667,
+            "pnl": 76.26666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "axis": "diag-",
+      "val": 0.2,
+      "state": {
+        "info_quality": 0.3,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.65
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 61.4699,
+      "leaf_metrics": {
+        "decision_quality": 0.6315,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.583,
+        "economic_performance": 0.6729,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.637,
+        "change_in_value": 0.6729,
+        "pnl": 67.2926
+      },
+      "mc_pnl": {
+        "mean": 61.5455,
+        "stdev": 7.1162,
+        "p05": 52.7357,
+        "p95": 67.2926
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.6315437037037037,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.5830000000000001,
+            "economic_performance": 0.6729262222222222,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6369557333333333,
+            "change_in_value": 0.6729262222222222,
+            "pnl": 67.29262222222222
+          }
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "axis": "diag-",
+      "val": 0.1,
+      "state": {
+        "info_quality": 0.4,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.55
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Full transparency",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 64.6796,
+      "leaf_metrics": {
+        "decision_quality": 0.8749,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.625,
+        "economic_performance": 0.799,
+        "ethical_stability": 0.673,
+        "customer_satisfaction": 0.7294,
+        "change_in_value": 0.709,
+        "pnl": 70.8951
+      },
+      "mc_pnl": {
+        "mean": 64.7604,
+        "stdev": 7.5962,
+        "p05": 55.3563,
+        "p95": 70.8951
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Full transparency",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.8749183333333335,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.6249999999999999,
+            "economic_performance": 0.7989510000000001,
+            "ethical_stability": 0.6729999999999999,
+            "customer_satisfaction": 0.7293706,
+            "change_in_value": 0.7089510000000001,
+            "pnl": 70.89510000000001
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "axis": "diag+",
+      "val": 0.1,
+      "state": {
+        "info_quality": 0.6,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.35
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 69.9359,
+      "leaf_metrics": {
+        "decision_quality": 0.7485,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.545,
+        "economic_performance": 0.7431,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.6639,
+        "change_in_value": 0.7431,
+        "pnl": 74.3111
+      },
+      "mc_pnl": {
+        "mean": 69.9927,
+        "stdev": 5.3472,
+        "p05": 63.373,
+        "p95": 74.3111
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7485185185185185,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.545,
+            "economic_performance": 0.7431111111111112,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6638666666666667,
+            "change_in_value": 0.7431111111111112,
+            "pnl": 74.31111111111112
+          }
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "axis": "diag+",
+      "val": 0.2,
+      "state": {
+        "info_quality": 0.7,
+        "adaptability": 0.55,
+        "authority_concentration": 0.55,
+        "alignment": 0.55,
+        "constraint_capacity": 0.5,
+        "environment_pressure": 0.25
+      },
+      "decisions": {
+        "Authority": "Centralize",
+        "Info strategy": "Restrict information",
+        "Market": "Favorable",
+        "Response": "AI-led"
+      },
+      "expected_pnl": 72.3803,
+      "leaf_metrics": {
+        "decision_quality": 0.7893,
+        "organizational_adaptability": 0.69,
+        "power_distribution": 0.05,
+        "coordination_efficiency": 0.545,
+        "economic_performance": 0.7676,
+        "ethical_stability": 0.561,
+        "customer_satisfaction": 0.6785,
+        "change_in_value": 0.7676,
+        "pnl": 76.7556
+      },
+      "mc_pnl": {
+        "mean": 72.4372,
+        "stdev": 5.3472,
+        "p05": 65.8174,
+        "p95": 76.7556
+      },
+      "trace": [
+        {
+          "kind": "decision",
+          "label": "Authority structure",
+          "branch": "Centralize",
+          "pillar": "structure",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Info strategy",
+          "branch": "Restrict information",
+          "pillar": "limiting_influence",
+          "metrics": null
+        },
+        {
+          "kind": "chance",
+          "label": "Market reaction",
+          "branch": "Favorable (p=0.6)",
+          "pillar": "",
+          "metrics": null
+        },
+        {
+          "kind": "decision",
+          "label": "Response mode",
+          "branch": "AI-led",
+          "pillar": "alignment",
+          "metrics": null
+        },
+        {
+          "kind": "terminal",
+          "label": "Outcome realized",
+          "branch": "",
+          "pillar": "",
+          "metrics": {
+            "decision_quality": 0.7892592592592593,
+            "organizational_adaptability": 0.6900000000000001,
+            "power_distribution": 0.04999999999999993,
+            "coordination_efficiency": 0.545,
+            "economic_performance": 0.7675555555555557,
+            "ethical_stability": 0.5609999999999999,
+            "customer_satisfaction": 0.6785333333333334,
+            "change_in_value": 0.7675555555555557,
+            "pnl": 76.75555555555556
+          }
+        }
+      ]
+    }
+  ]
+}

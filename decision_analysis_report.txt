@@ -1,0 +1,209 @@
+================================================================================
+  DECISION ANALYSIS REPORT
+  Event: CEO departs unexpectedly
+  Objective: Maximize PnL
+================================================================================
+
+
+PART 1 -- DECISION TIMELINE (baseline scenario)
+================================================================================
+
+Starting state:
+  info_quality            0.50
+  adaptability            0.55
+  authority_concentration 0.55
+  alignment               0.55
+  constraint_capacity     0.50
+  environment_pressure    0.45
+
+
+[T1] DECISION -- Authority structure
+-------------------------------------------------------------------------------
+  Chosen:   Centralize
+  Rejected: Decentralize
+
+  Why: EV(Centralize) = 67.77  vs  EV(Decentralize) = 61.35
+  Single unified command cuts coordination noise when info quality is moderate
+  and alignment is the current bottleneck. The bottleneck urgency model gives
+  high marginal value to fixing the scarce factor first.
+
+  State changes after this step:
+    auth_concentration  0.55  -->  0.95  (+0.40)
+    alignment           0.55  -->  0.73  (+0.18)
+    info_quality        0.50  -->  0.62  (+0.12)
+    constraint_capacity 0.50  -->  0.68  (+0.18)
+    adaptability        0.55  -->  0.43  (-0.12)  [trade-off: slower decisions]
+
+
+[T2] DECISION -- Information strategy
+-------------------------------------------------------------------------------
+  Chosen:   Full transparency
+  Rejected: Restrict information
+
+  Why: EV(Full transparency) = 67.77  vs  EV(Restrict information) = 65.04
+  Info quality is still moderate (0.62, below the flip threshold of ~0.65).
+  The +0.30 info boost has higher marginal value than the pressure reduction
+  from restricting. This choice FLIPS in scenarios 4, 5, 8, 9, 10, 12-14, 16, 17.
+
+  State changes after this step:
+    info_quality         0.62  -->  0.92  (+0.30)
+    alignment            0.73  -->  0.83  (+0.10)
+    environment_pressure 0.45  -->  0.57  (+0.12)  [cost: bad news travels fast]
+
+
+[T3] CHANCE -- Market reaction
+-------------------------------------------------------------------------------
+  Most likely outcome: Favorable  (p = 0.60)
+  Alternative:         Adverse    (p = 0.40)
+
+  EV is probability-weighted:  0.60 * 73.99  +  0.40 * 58.45  =  67.77
+
+  Favorable branch state changes:
+    environment_pressure 0.57  -->  0.35  (-0.22)
+    alignment            0.83  -->  0.89  (+0.06)
+
+  Adverse branch state changes:
+    environment_pressure 0.57  -->  0.85  (+0.28)
+    alignment            0.83  -->  0.73  (-0.10)
+    adaptability         0.43  -->  0.38  (-0.05)
+
+
+[T4] DECISION -- Response mode  (on Favorable branch)
+-------------------------------------------------------------------------------
+  Chosen:   AI-led
+  Rejected: Hybrid (71.38), Human-led (68.54)
+
+  Why: Adaptability is the remaining bottleneck (0.43, scarce).
+  AI-led gives the largest adaptability boost (+0.26). Human-led gives bigger
+  alignment gain but alignment is no longer scarce at this point (0.89).
+
+  State changes after this step:
+    adaptability   0.43  -->  0.69  (+0.26)  [largest marginal gain]
+    info_quality   0.92  -->  1.00  (+0.08, capped at 1.0)
+    alignment      0.89  -->  0.94  (+0.05)
+
+
+[T5] OUTCOME REALIZED
+-------------------------------------------------------------------------------
+  Final state (Favorable branch):
+    info_quality            1.00
+    adaptability            0.69
+    authority_concentration 0.95
+    alignment               0.94
+    constraint_capacity     0.68
+    environment_pressure    0.35
+
+  Metrics:
+    decision_quality        0.893
+    org_adaptability        0.690
+    coordination_efficiency 0.625
+    economic_performance    0.810
+    ethical_stability       0.673   [note: low power_distribution hurts this]
+    customer_satisfaction   0.736
+    power_distribution      0.050   [low: centralization trade-off]
+    change_in_value         0.740
+    PnL (leaf)              73.99
+
+  Monte Carlo (5,000 runs, optimal policy):
+    E[PnL]   67.77
+    p05      58.45
+    p95      73.99
+    stdev     ~7.6
+
+
+================================================================================
+  PART 2 -- 17-SCENARIO VARIATION GRID
+  (* = Info strategy flipped from baseline "Full transparency")
+================================================================================
+
+  Authority and Response mode are STABLE across all 17 scenarios:
+    Authority: always  Centralize
+    Response:  always  AI-led
+
+  Only the Information strategy flips. Flip boundary:
+    - info_quality >= 0.65  --> Restrict information
+    - env_pressure >= 0.70  --> Restrict information
+    - alignment    >= 0.70  --> Restrict information  (or <= 0.25)
+    - diagonal: info up + pressure down >= 0.10  --> Restrict information
+
+  Reasoning: when the factor being improved (info, pressure, alignment) is
+  already ample, panic control (Restrict) has higher marginal value than
+  providing more of an already-sufficient resource (Full transparency).
+
+ #  axis         val   Info strategy           E[PnL]    p05     p95
+ ---  -----------  ----  ----------------------  ------  ------  ------
+  axis: info_quality (env_pressure=0.45, alignment=0.55)
+  1   info         0.20  Full transparency        61.90   52.58   68.12
+  2   info         0.35  Full transparency        65.57   56.25   71.79
+  3   info         0.50  Full transparency *BASE* 67.77   58.45   73.99
+  4   info         0.65  Restrict information *   71.16   64.60   75.53
+  5   info         0.80  Restrict information *   74.82   68.26   79.20
+
+  axis: environment_pressure (info_quality=0.50, alignment=0.55)
+  6   press        0.20  Full transparency        73.05   63.73   79.27
+  7   press        0.35  Full transparency        69.88   60.56   76.10
+  8   press        0.70  Restrict information *   65.62   56.25   71.87
+  9   press        0.85  Restrict information *   62.43   53.05   68.67
+
+  axis: alignment (info_quality=0.50, env_pressure=0.45)
+ 10   align        0.25  Restrict information *   61.89   55.73   66.00
+ 11   align        0.40  Full transparency        64.77   55.45   70.99
+ 12   align        0.70  Restrict information *   70.49   63.93   74.87
+ 13   align        0.85  Restrict information *   72.29   66.33   76.27
+
+  diagonal: info and env_pressure move in opposite directions
+ 14   diag-        0.20  Restrict information *   61.47   52.74   67.29
+      (info=0.30, press=0.65)
+ 15   diag-        0.10  Full transparency        64.68   55.36   70.90
+      (info=0.40, press=0.55)
+ 16   diag+        0.10  Restrict information *   69.94   63.37   74.31
+      (info=0.60, press=0.35)
+ 17   diag+        0.20  Restrict information *   72.38   65.82   76.76
+      (info=0.70, press=0.25)
+
+  Summary: 11 of 17 scenarios choose Restrict information.
+           6 of 17 scenarios choose Full transparency (low info, low pressure,
+           moderate alignment zone).
+
+
+================================================================================
+  FRAMEWORK INTERPRETATION
+================================================================================
+
+  Authority structure (x_str):
+    Centralize is dominant in all scenarios because it simultaneously raises
+    auth_concentration, alignment, info_quality, and constraint_capacity.
+    The only cost (lower adaptability) is recovered by choosing AI-led response.
+
+  Information strategy (x_inf -- limiting influence):
+    This is the sensitive lever. It flips based on which factor is the binding
+    bottleneck at the time the decision is made (post-Centralize):
+    - If info is scarce (<0.65): pay the pressure cost for the info boost.
+    - If info is ample (>=0.65): use panic control (Restrict) instead.
+    - High pressure already: Restrict to stop the bleed first.
+    - High alignment already: Restrict (alignment is not scarce, panic control wins).
+    - Very low alignment (0.25): Restrict information to prevent rumor cascades
+      that erode already-fragile alignment further.
+
+  Response mode (x_align):
+    AI-led is dominant because adaptability is always the remaining bottleneck
+    after Centralize (which costs -0.12 adapt). The +0.26 adaptability boost
+    from AI-led has the highest urgency multiplier in every scenario tested.
+
+  Study dimension trade-off:
+    Power distribution is always low (0.05) because Centralize pushes
+    auth_concentration to 0.95. This is the cost of the authority structure
+    choice: decision quality and coordination improve, but power distribution
+    and ethical stability take a hit. RQ3 confirmed: concentration trades
+    speed/quality for distribution/ethics.
+
+================================================================================
+  FILES
+================================================================================
+  run_variations.py           -- simulation script (17 scenarios)
+  run_summary.json            -- full simulation data (trace + MC + metrics)
+  example_simulation.py       -- 5-situation demo (Hostile market flip shown)
+  tree_result.json            -- 5-situation results
+  decision_analysis/decision_tree.py   -- tree engine
+  decision_analysis/metrics/evaluation.py  -- outcome model
+================================================================================
