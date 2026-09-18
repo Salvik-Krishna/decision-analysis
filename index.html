@@ -291,7 +291,7 @@
 <script>
 // ── Config ────────────────────────────────────────────────────────────────
 let API_KEY = "";
-let MODEL = "gpt-oss-120b";
+let MODEL = "gemini-2.5-flash";
 function getModel() { return document.getElementById('model-input')?.value.trim() || MODEL; }
 
 // ── System prompt ─────────────────────────────────────────────────────────
@@ -460,7 +460,7 @@ function tryParseOptions(text) {
 
 // ── API call (Groq — OpenAI-compatible) with rate-limit retry ─────────────
 async function callAPI(msgs) {
-  if (!API_KEY) throw new Error("No API key — paste your Groq key above and press Set.");
+  // API key is handled server-side
 
   const recent = msgs.slice(-10);
   const messages = [

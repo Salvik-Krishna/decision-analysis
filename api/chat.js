@@ -3,22 +3,25 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.groq || process.env.GROQ_API_KEY || process.env.GROQ_KEY;
+  const apiKey = process.env.GOOGLE_API_KEY || process.env.google;
   if (!apiKey) {
     return res.status(500).json({
-      error: 'No API key found. Add a Vercel environment variable named "groq" with your Groq key, then redeploy.'
+      error: 'No API key found. Add a Vercel environment variable named "GOOGLE_API_KEY" with your Google AI key, then redeploy.'
     });
   }
 
   try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(req.body),
-    });
+    const response = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(req.body),
+      }
+    );
 
     const data = await response.json();
 
