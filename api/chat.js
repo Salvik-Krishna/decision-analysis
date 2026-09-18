@@ -3,7 +3,7 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.GOOGLE_API_KEY || process.env.google;
+  const apiKey = process.env.googl || process.env.GOOGLE_API_KEY || process.env.google;
   if (!apiKey) {
     return res.status(500).json({
       error: 'No API key found. Add a Vercel environment variable named "GOOGLE_API_KEY" with your Google AI key, then redeploy.'
