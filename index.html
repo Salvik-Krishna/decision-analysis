@@ -269,13 +269,6 @@
   <div class="status-dot" id="status-dot"></div>
 </header>
 
-<div class="key-bar">
-  <label>OPENAI KEY</label>
-  <input id="key-input" type="password" placeholder="Paste your key here…">
-  <input id="model-input" type="text" value="gpt-oss-120b" placeholder="model name" style="background:#0f1520;border:1px solid #1e2a3a;border-radius:4px;color:#88b4e8;padding:5px 10px;font-size:12px;font-family:'Courier New',monospace;outline:none;width:200px;">
-  <button id="key-btn" onclick="setKey()">Set</button>
-  <span id="key-ok"></span>
-</div>
 
 <div class="state-bar" id="state-bar">
   <div class="state-item">info <span id="s-info">—</span></div>
@@ -298,7 +291,7 @@
 <script>
 // ── Config ────────────────────────────────────────────────────────────────
 let API_KEY = "";
-let MODEL = "gpt-oss-120b";
+let MODEL = "gemma2-9b-it";
 function getModel() { return document.getElementById('model-input')?.value.trim() || MODEL; }
 
 // ── System prompt ─────────────────────────────────────────────────────────
@@ -486,12 +479,9 @@ async function callAPI(msgs) {
   let delay = 5000;
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body,
     });
 
@@ -650,7 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── Boot ──────────────────────────────────────────────────────────────────
 window.onload = () => {
-  appendMsg('assistant', 'Paste your OpenAI API key (sk-...) above and press Set to start a case.');
+  newCase();
 };
 </script>
 </body>
