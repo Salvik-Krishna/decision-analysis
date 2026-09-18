@@ -272,7 +272,7 @@
 <div class="key-bar">
   <label>OPENAI KEY</label>
   <input id="key-input" type="password" placeholder="Paste your key here…">
-  <input id="model-input" type="text" value="gpt-4o-mini" placeholder="model name" style="background:#0f1520;border:1px solid #1e2a3a;border-radius:4px;color:#88b4e8;padding:5px 10px;font-size:12px;font-family:'Courier New',monospace;outline:none;width:200px;">
+  <input id="model-input" type="text" value="gpt-oss-120b" placeholder="model name" style="background:#0f1520;border:1px solid #1e2a3a;border-radius:4px;color:#88b4e8;padding:5px 10px;font-size:12px;font-family:'Courier New',monospace;outline:none;width:200px;">
   <button id="key-btn" onclick="setKey()">Set</button>
   <span id="key-ok"></span>
 </div>
@@ -298,7 +298,7 @@
 <script>
 // ── Config ────────────────────────────────────────────────────────────────
 let API_KEY = "";
-let MODEL = "gpt-4o-mini";
+let MODEL = "gpt-oss-120b";
 function getModel() { return document.getElementById('model-input')?.value.trim() || MODEL; }
 
 // ── System prompt ─────────────────────────────────────────────────────────
