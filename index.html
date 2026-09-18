@@ -425,8 +425,9 @@ HOW TO RUN A CASE:
 9. After all decisions, show final PnL and a performance summary with score X/N optimal.
 10. Ask if they want another case.
 
-Keep each message focused. Never skip the VERDICT line — it must always appear first after a choice.
-Be honest. Praise correct reasoning. For wrong choices, explain the cost clearly but constructively.`;
+IMPORTANT: Keep every reply under 220 words. Be direct and specific — no preamble, no filler.
+Never skip the VERDICT line — it must always appear first after a choice.
+Be honest. Praise correct reasoning. For wrong choices explain the cost clearly but constructively.`;
 
 // ── State ─────────────────────────────────────────────────────────────────
 let messages = [];
@@ -607,7 +608,7 @@ function tryParseOptions(text) {
 async function callAPI(msgs) {
   // API key is handled server-side
 
-  const recent = msgs.slice(-10);
+  const recent = msgs.slice(-6);
   const messages = [
     { role: 'system', content: SYSTEM },
     ...recent,
@@ -616,7 +617,7 @@ async function callAPI(msgs) {
   const body = JSON.stringify({
     model: MODEL,
     messages,
-    max_tokens: 8192,
+    max_tokens: 1024,
     temperature: 0.7,
   });
 
