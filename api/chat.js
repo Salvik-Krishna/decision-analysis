@@ -3,9 +3,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.groq;
+  const apiKey = process.env.groq || process.env.GROQ_API_KEY || process.env.GROQ_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'groq env var not configured on server' });
+    return res.status(500).json({
+      error: 'No API key found. Add a Vercel environment variable named "groq" with your Groq key, then redeploy.'
+    });
   }
 
   try {
