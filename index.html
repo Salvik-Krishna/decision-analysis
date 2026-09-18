@@ -462,23 +462,29 @@ function updateProgress(verdict) {
 }
 
 // ── UI helpers ────────────────────────────────────────────────────────────
+function fmt(v) { return (v != null && !isNaN(v)) ? (+v).toFixed(2) : '—'; }
 function updateStateBar(state) {
   if (!state) return;
-  document.getElementById('s-info').textContent  = state.info_quality.toFixed(2);
-  document.getElementById('s-adapt').textContent = state.adaptability.toFixed(2);
-  document.getElementById('s-auth').textContent  = state.authority_concentration.toFixed(2);
-  document.getElementById('s-align').textContent = state.alignment.toFixed(2);
-  document.getElementById('s-cap').textContent   = state.constraint_capacity.toFixed(2);
-  document.getElementById('s-press').textContent = state.environment_pressure.toFixed(2);
+  document.getElementById('s-info').textContent  = fmt(state.info_quality);
+  document.getElementById('s-adapt').textContent = fmt(state.adaptability);
+  document.getElementById('s-auth').textContent  = fmt(state.authority_concentration);
+  document.getElementById('s-align').textContent = fmt(state.alignment);
+  document.getElementById('s-cap').textContent   = fmt(state.constraint_capacity);
+  document.getElementById('s-press').textContent = fmt(state.environment_pressure);
 
-  // compute rough PnL
-  const dq = Math.max(0, Math.min(1,
-    (state.info_quality*0.55 + state.adaptability*0.35 + state.alignment*0.45) / 1.35
-    - state.environment_pressure * state.constraint_capacity * (1 - state.authority_concentration) * 0.55
-  ));
-  const ep = Math.max(0, dq*0.6 + state.adaptability*0.2 + state.constraint_capacity*0.2);
-  const pnl = Math.max(0, (ep - 0.2*state.environment_pressure)*100);
-  document.getElementById('s-pnl').textContent = pnl.toFixed(1);
+  // compute rough PnL (skip if any required field is missing)
+  const iq = state.info_quality, ad = state.adaptability, al = state.alignment,
+        ep2 = state.environment_pressure, cap = state.constraint_capacity,
+        ac = state.authority_concentration;
+  if ([iq,ad,al,ep2,cap,ac].every(v => v != null && !isNaN(v))) {
+    const dq = Math.max(0, Math.min(1,
+      (iq*0.55 + ad*0.35 + al*0.45) / 1.35
+      - ep2 * cap * (1 - ac) * 0.55
+    ));
+    const ep = Math.max(0, dq*0.6 + ad*0.2 + cap*0.2);
+    const pnl = Math.max(0, (ep - 0.2*ep2)*100);
+    document.getElementById('s-pnl').textContent = pnl.toFixed(1);
+  }
 }
 
 function appendMsg(role, text, options) {
