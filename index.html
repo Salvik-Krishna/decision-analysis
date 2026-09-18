@@ -607,7 +607,7 @@ async function detectModel() {
   if (!res.ok) throw new Error(`Key check failed: ${res.status}`);
   const data = await res.json();
   // pick first model that supports generateContent
-  const PREFER = ['gemini-2.0-flash','gemini-1.5-flash','gemini-1.5-pro','gemini-pro'];
+  const PREFER = ['gemini-3.5-flash-lite'];
   const available = (data.models || [])
     .filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
     .map(m => m.name.replace('models/', ''));
