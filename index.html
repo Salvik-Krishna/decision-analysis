@@ -297,6 +297,53 @@
     align-self: flex-end;
   }
   #new-btn:hover { border-color: #4e6080; color: #d4dae8; }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    background: #0c1420;
+    border-bottom: 1px solid #1e2a3a;
+    padding: 8px 20px 10px;
+    flex-shrink: 0;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #4e6080;
+    margin-bottom: 6px;
+  }
+  #prog-score { color: #d4dae8; font-weight: 700; }
+  .progress-track {
+    height: 4px;
+    background: #1e2a3a;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #35cc83, #4f94ff);
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+  .verdict-dots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .vdot {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+  }
+  .vdot.optimal    { background: #0d3020; color: #35cc83; border: 1px solid #1a6040; }
+  .vdot.suboptimal { background: #2a0a10; color: #ff6b6b; border: 1px solid #5a1a20; }
+  .vdot.acceptable { background: #2a1a00; color: #f0a030; border: 1px solid #5a3a00; }
 </style>
 </head>
 <body>
@@ -316,6 +363,16 @@
   <div class="state-item">capacity <span id="s-cap">—</span></div>
   <div class="state-item">pressure <span id="s-press">—</span></div>
   <div class="state-item" style="margin-left:auto">E[PnL] <span id="s-pnl" style="color:#35cc83">—</span></div>
+</div>
+<div class="progress-bar-wrap" id="progress-wrap" style="display:none">
+  <div class="progress-label">
+    <span id="prog-text">0 decisions</span>
+    <span id="prog-score">—</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="prog-fill"></div>
+  </div>
+  <div class="verdict-dots" id="verdict-dots"></div>
 </div>
 
 <div class="chat-area" id="chat"></div>
@@ -344,38 +401,65 @@ Your framework has 6 latent state variables (all 0–1):
   constraint_capacity     — how much budget/resource slack exists
   environment_pressure    — how hostile/urgent the environment is
 
-Outcome metrics derived from state:
-  decision_quality  = f(info, adapt, align) using bottleneck urgency model
-  power_distribution = 1 − authority_concentration
-  ethical_stability  = 0.7×align + 0.3×power_distribution
-  economic_performance = 0.6×decision_quality + 0.2×adapt + 0.2×capacity
-  PnL (0–100)        = (economic_performance − 0.2×pressure) × 100
+Outcome metrics:
+  decision_quality  = f(info, adapt, align) bottleneck urgency model
+  PnL (0–100)       = (economic_performance − 0.2×pressure) × 100
 
-Key insight from simulation (17 scenarios, CEO departure event):
-  - Authority: ALWAYS Centralize (gives +align, +info, +capacity; dominates)
-  - Response: ALWAYS AI-led (fills adaptability bottleneck left by Centralize)
-  - Info strategy: FLIPS — Full transparency when info<0.65 AND pressure<0.70 AND align<0.70;
-    Restrict information otherwise (panic control has higher marginal value)
+Key insight (17 scenarios, CEO departure event):
+  - Authority: ALWAYS Centralize
+  - Response: ALWAYS AI-led
+  - Info strategy: FLIPS at info≥0.65 OR pressure≥0.70 OR align≥0.70 → Restrict
 
 HOW TO RUN A CASE:
-1. Present a real-sounding organisational crisis or decision event.
-2. Describe the starting state (give exact numbers for all 6 variables).
-3. Show the decision tree: 3–4 sequential decisions the user must make.
-4. For each decision, give 2–3 named options with brief descriptions.
-5. Ask the user to choose. WAIT for their answer.
-6. Validate: compare their choice to the EV-optimal choice. Explain WHY using the bottleneck model.
-7. Apply state changes from their choice (whether optimal or not) and show updated state.
+1. Present a real-sounding organisational crisis. Give exact numbers for all 6 state variables.
+2. Offer 3 options (A, B, C) for the decision.
+3. Ask the user to choose. WAIT — do not reveal the answer first.
+4. After they choose, give a VERDICT line at the very start of your reply in this exact format:
+   VERDICT: ✅ OPTIMAL  — if they chose correctly
+   VERDICT: ❌ SUBOPTIMAL — if not
+   VERDICT: ⚠️ ACCEPTABLE — if it's a defensible but not best choice
+5. Then explain WHY in 2–3 sentences using the bottleneck model. Be direct and specific.
+6. Show what changed in state (delta values, e.g. +0.10 info_quality).
+7. Give a one-line coaching tip: what to watch for next time.
 8. Move to the next decision in the sequence.
-9. At the end, show the outcome metrics and PnL, compare to optimal path.
-10. Ask if they want another case or a harder variation.
+9. After all decisions, show final PnL and a performance summary with score X/N optimal.
+10. Ask if they want another case.
 
-Keep each message focused — one decision at a time. Be specific about numbers.
-Never give away the optimal answer before the user chooses. After they choose, be honest.`;
+Keep each message focused. Never skip the VERDICT line — it must always appear first after a choice.
+Be honest. Praise correct reasoning. For wrong choices, explain the cost clearly but constructively.`;
 
 // ── State ─────────────────────────────────────────────────────────────────
 let messages = [];
 let currentState = null;
 let busy = false;
+let score = { optimal: 0, suboptimal: 0, acceptable: 0, total: 0 };
+
+function detectVerdict(text) {
+  if (/VERDICT\s*:.*✅|VERDICT\s*:.*OPTIMAL/i.test(text) && !/SUBOPTIMAL/i.test(text.match(/VERDICT.{0,40}/i)?.[0] || '')) return 'optimal';
+  if (/VERDICT\s*:.*❌|VERDICT\s*:.*SUBOPTIMAL/i.test(text)) return 'suboptimal';
+  if (/VERDICT\s*:.*⚠️|VERDICT\s*:.*ACCEPTABLE/i.test(text)) return 'acceptable';
+  return null;
+}
+
+function updateProgress(verdict) {
+  if (!verdict) return;
+  score.total++;
+  score[verdict]++;
+  const wrap = document.getElementById('progress-wrap');
+  wrap.style.display = 'block';
+
+  const pct = Math.round((score.optimal + score.acceptable * 0.5) / score.total * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = `${score.total} decision${score.total > 1 ? 's' : ''}`;
+  document.getElementById('prog-score').textContent =
+    `${score.optimal} optimal · ${score.acceptable} ok · ${score.suboptimal} missed`;
+
+  const dot = document.createElement('div');
+  dot.className = 'vdot ' + verdict;
+  dot.textContent = score.total;
+  dot.title = verdict.toUpperCase();
+  document.getElementById('verdict-dots').appendChild(dot);
+}
 
 // ── UI helpers ────────────────────────────────────────────────────────────
 function updateStateBar(state) {
@@ -586,6 +670,10 @@ async function sendMessage() {
     const parsed = tryParseState(reply);
     if (parsed) { currentState = parsed; updateStateBar(currentState); }
 
+    // Track verdict
+    const verdict = detectVerdict(reply);
+    if (verdict) updateProgress(verdict);
+
     // Try to extract options for quick-pick buttons
     const opts = tryParseOptions(reply);
     appendMsg('assistant', reply, opts);
@@ -606,6 +694,10 @@ async function newCase() {
   messages = [];
   document.getElementById('chat').innerHTML = '';
   currentState = null;
+  score = { optimal: 0, suboptimal: 0, acceptable: 0, total: 0 };
+  document.getElementById('progress-wrap').style.display = 'none';
+  document.getElementById('verdict-dots').innerHTML = '';
+  document.getElementById('prog-fill').style.width = '0%';
   updateStateBar({
     info_quality:0, adaptability:0, authority_concentration:0,
     alignment:0, constraint_capacity:0, environment_pressure:0
