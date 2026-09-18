@@ -164,30 +164,68 @@
   .options {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 12px;
+    gap: 6px;
+    margin-top: 14px;
   }
   .opt-btn {
-    background: #0f1c30;
+    background: #0a1525;
     border: 1px solid #1e3a5a;
+    border-left: 3px solid #1e3a5a;
     color: #88b4e8;
-    padding: 10px 16px;
+    padding: 0;
     border-radius: 6px;
     cursor: pointer;
     text-align: left;
     font-size: 13px;
-    font-family: 'Courier New', monospace;
-    transition: background .15s, border-color .15s;
+    transition: background .15s, border-color .15s, transform .1s;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
   }
   .opt-btn:hover {
-    background: #122040;
+    background: #0f1e38;
     border-color: #4f94ff;
+    border-left-color: #4f94ff;
     color: #cce0ff;
+    transform: translateX(2px);
   }
   .opt-btn.selected {
-    background: #0c2150;
+    background: #0c2050;
     border-color: #4f94ff;
+    border-left-color: #4f94ff;
     color: #4f94ff;
+  }
+  .opt-btn:disabled {
+    cursor: default;
+    transform: none;
+  }
+  .opt-badge {
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f2040;
+    color: #4f94ff;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    border-right: 1px solid #1e3a5a;
+    flex-shrink: 0;
+    transition: background .15s;
+  }
+  .opt-btn:hover .opt-badge {
+    background: #142a5a;
+    color: #88c0ff;
+  }
+  .opt-btn.selected .opt-badge {
+    background: #1a3870;
+    color: #cce0ff;
+  }
+  .opt-text {
+    padding: 10px 14px;
+    line-height: 1.5;
+    font-family: system-ui, -apple-system, sans-serif;
   }
 
   /* Typing indicator */
@@ -375,14 +413,27 @@ function appendMsg(role, text, options) {
   if (options && options.length) {
     const optDiv = document.createElement('div');
     optDiv.className = 'options';
-    options.forEach(opt => {
+    options.forEach((opt, i) => {
+      const letter = String.fromCharCode(65 + i);
       const btn = document.createElement('button');
       btn.className = 'opt-btn';
-      btn.textContent = opt;
+
+      const badge = document.createElement('div');
+      badge.className = 'opt-badge';
+      badge.textContent = letter;
+
+      const txt = document.createElement('div');
+      txt.className = 'opt-text';
+      // strip leading "A. " if the parser already prepended it
+      txt.textContent = opt.replace(/^[A-C]\.\s*/i, '');
+
+      btn.appendChild(badge);
+      btn.appendChild(txt);
+
       btn.onclick = () => {
         document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
         btn.classList.add('selected');
-        document.getElementById('user-input').value = opt;
+        document.getElementById('user-input').value = letter;
         sendMessage();
       };
       optDiv.appendChild(btn);
