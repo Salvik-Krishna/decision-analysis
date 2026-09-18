@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Analysis — Case Chat</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #0f1117;
+    color: #d4dae8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  header {
+    padding: 14px 20px;
+    border-bottom: 1px solid #1e2a3a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #111820;
+    flex-shrink: 0;
+  }
+  .logo {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4f94ff;
+    letter-spacing: .04em;
+  }
+  .header-sub {
+    font-size: 11px;
+    color: #4e6080;
+  }
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #35cc83;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* Key bar */
+  .key-bar {
+    background: #0c1420;
+    border-bottom: 1px solid #1e2a3a;
+    padding: 7px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .key-bar label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #4e6080;
+    white-space: nowrap;
+  }
+  #key-input {
+    flex: 1;
+    background: #0f1520;
+    border: 1px solid #1e2a3a;
+    border-radius: 4px;
+    color: #88b4e8;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    outline: none;
+    min-width: 0;
+  }
+  #key-input:focus { border-color: #2a4a7a; }
+  #key-btn {
+    background: #1a3870;
+    border: none;
+    border-radius: 4px;
+    color: #88b4e8;
+    padding: 5px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  #key-btn:hover { background: #204a9a; color: #cce0ff; }
+  #key-ok {
+    font-size: 11px;
+    color: #35cc83;
+    display: none;
+  }
+
+  /* State bar */
+  .state-bar {
+    background: #0c1420;
+    border-bottom: 1px solid #1e2a3a;
+    padding: 8px 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .state-item {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #4e6080;
+  }
+  .state-item span {
+    color: #d4dae8;
+    font-weight: 600;
+  }
+
+  /* Chat area */
+  .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .msg {
+    display: flex;
+    gap: 12px;
+    max-width: 820px;
+    width: 100%;
+  }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg.assistant { align-self: flex-start; }
+
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Courier New', monospace;
+  }
+  .avatar.ai  { background: #0c2150; color: #4f94ff; }
+  .avatar.you { background: #1a2a10; color: #35cc83; }
+
+  .bubble {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    max-width: 680px;
+  }
+  .msg.assistant .bubble {
+    background: #111820;
+    border: 1px solid #1e2a3a;
+    color: #d4dae8;
+  }
+  .msg.user .bubble {
+    background: #0c2150;
+    border: 1px solid #1a3870;
+    color: #cce0ff;
+  }
+
+  /* Options (choice buttons) */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .opt-btn {
+    background: #0f1c30;
+    border: 1px solid #1e3a5a;
+    color: #88b4e8;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    transition: background .15s, border-color .15s;
+  }
+  .opt-btn:hover {
+    background: #122040;
+    border-color: #4f94ff;
+    color: #cce0ff;
+  }
+  .opt-btn.selected {
+    background: #0c2150;
+    border-color: #4f94ff;
+    color: #4f94ff;
+  }
+
+  /* Typing indicator */
+  .typing {
+    display: flex; gap: 5px; align-items: center;
+    padding: 14px 16px;
+  }
+  .typing span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4e6080;
+    animation: bounce .9s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: .15s; }
+  .typing span:nth-child(3) { animation-delay: .30s; }
+  @keyframes bounce {
+    0%,60%,100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }
+
+  /* Input row */
+  .input-row {
+    padding: 14px 20px;
+    border-top: 1px solid #1e2a3a;
+    display: flex;
+    gap: 10px;
+    background: #111820;
+    flex-shrink: 0;
+  }
+  #user-input {
+    flex: 1;
+    background: #0f1520;
+    border: 1px solid #1e2a3a;
+    border-radius: 6px;
+    color: #d4dae8;
+    padding: 10px 14px;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    min-height: 42px;
+    max-height: 140px;
+  }
+  #user-input:focus { border-color: #2a4a7a; }
+  #send-btn {
+    background: #1a3870;
+    border: none;
+    border-radius: 6px;
+    color: #88b4e8;
+    padding: 0 18px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background .15s;
+    align-self: flex-end;
+    height: 42px;
+  }
+  #send-btn:hover { background: #204a9a; color: #cce0ff; }
+  #send-btn:disabled { opacity: .4; cursor: default; }
+  #new-btn {
+    background: transparent;
+    border: 1px solid #1e2a3a;
+    border-radius: 6px;
+    color: #4e6080;
+    padding: 0 14px;
+    cursor: pointer;
+    font-size: 12px;
+    height: 42px;
+    align-self: flex-end;
+  }
+  #new-btn:hover { border-color: #4e6080; color: #d4dae8; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DA//CHAT</div>
+  <div class="header-sub">Decision Analysis · Human-AI Org Simulator</div>
+  <div class="status-dot" id="status-dot"></div>
+</header>
+
+<div class="key-bar">
+  <label>OPENAI KEY</label>
+  <input id="key-input" type="password" placeholder="Paste your key here…">
+  <input id="model-input" type="text" value="gpt-oss-120b" placeholder="model name" style="background:#0f1520;border:1px solid #1e2a3a;border-radius:4px;color:#88b4e8;padding:5px 10px;font-size:12px;font-family:'Courier New',monospace;outline:none;width:200px;">
+  <button id="key-btn" onclick="setKey()">Set</button>
+  <span id="key-ok"></span>
+</div>
+
+<div class="state-bar" id="state-bar">
+  <div class="state-item">info <span id="s-info">—</span></div>
+  <div class="state-item">adapt <span id="s-adapt">—</span></div>
+  <div class="state-item">auth_conc <span id="s-auth">—</span></div>
+  <div class="state-item">alignment <span id="s-align">—</span></div>
+  <div class="state-item">capacity <span id="s-cap">—</span></div>
+  <div class="state-item">pressure <span id="s-press">—</span></div>
+  <div class="state-item" style="margin-left:auto">E[PnL] <span id="s-pnl" style="color:#35cc83">—</span></div>
+</div>
+
+<div class="chat-area" id="chat"></div>
+
+<div class="input-row">
+  <textarea id="user-input" placeholder="Type your response or choose an option above…" rows="1"></textarea>
+  <button id="new-btn" onclick="newCase()">New case</button>
+  <button id="send-btn" onclick="sendMessage()">&#8593;</button>
+</div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────
+let API_KEY = "";
+let MODEL = "gpt-oss-120b";
+function getModel() { return document.getElementById('model-input')?.value.trim() || MODEL; }
+
+// ── System prompt ─────────────────────────────────────────────────────────
+const SYSTEM = `You are a decision analysis tutor running an interactive case simulation.
+You study decision-making in human-AI hybrid organisations.
+
+Your framework has 6 latent state variables (all 0–1):
+  info_quality            — how good the information reaching decision-makers is
+  adaptability            — how quickly the org can reconfigure
+  authority_concentration — how centralised decision authority is (1 = one person)
+  alignment               — how aligned humans and AI are
+  constraint_capacity     — how much budget/resource slack exists
+  environment_pressure    — how hostile/urgent the environment is
+
+Outcome metrics derived from state:
+  decision_quality  = f(info, adapt, align) using bottleneck urgency model
+  power_distribution = 1 − authority_concentration
+  ethical_stability  = 0.7×align + 0.3×power_distribution
+  economic_performance = 0.6×decision_quality + 0.2×adapt + 0.2×capacity
+  PnL (0–100)        = (economic_performance − 0.2×pressure) × 100
+
+Key insight from simulation (17 scenarios, CEO departure event):
+  - Authority: ALWAYS Centralize (gives +align, +info, +capacity; dominates)
+  - Response: ALWAYS AI-led (fills adaptability bottleneck left by Centralize)
+  - Info strategy: FLIPS — Full transparency when info<0.65 AND pressure<0.70 AND align<0.70;
+    Restrict information otherwise (panic control has higher marginal value)
+
+HOW TO RUN A CASE:
+1. Present a real-sounding organisational crisis or decision event.
+2. Describe the starting state (give exact numbers for all 6 variables).
+3. Show the decision tree: 3–4 sequential decisions the user must make.
+4. For each decision, give 2–3 named options with brief descriptions.
+5. Ask the user to choose. WAIT for their answer.
+6. Validate: compare their choice to the EV-optimal choice. Explain WHY using the bottleneck model.
+7. Apply state changes from their choice (whether optimal or not) and show updated state.
+8. Move to the next decision in the sequence.
+9. At the end, show the outcome metrics and PnL, compare to optimal path.
+10. Ask if they want another case or a harder variation.
+
+Keep each message focused — one decision at a time. Be specific about numbers.
+Never give away the optimal answer before the user chooses. After they choose, be honest.`;
+
+// ── State ─────────────────────────────────────────────────────────────────
+let messages = [];
+let currentState = null;
+let busy = false;
+
+// ── UI helpers ────────────────────────────────────────────────────────────
+function updateStateBar(state) {
+  if (!state) return;
+  document.getElementById('s-info').textContent  = state.info_quality.toFixed(2);
+  document.getElementById('s-adapt').textContent = state.adaptability.toFixed(2);
+  document.getElementById('s-auth').textContent  = state.authority_concentration.toFixed(2);
+  document.getElementById('s-align').textContent = state.alignment.toFixed(2);
+  document.getElementById('s-cap').textContent   = state.constraint_capacity.toFixed(2);
+  document.getElementById('s-press').textContent = state.environment_pressure.toFixed(2);
+
+  // compute rough PnL
+  const dq = Math.max(0, Math.min(1,
+    (state.info_quality*0.55 + state.adaptability*0.35 + state.alignment*0.45) / 1.35
+    - state.environment_pressure * state.constraint_capacity * (1 - state.authority_concentration) * 0.55
+  ));
+  const ep = Math.max(0, dq*0.6 + state.adaptability*0.2 + state.constraint_capacity*0.2);
+  const pnl = Math.max(0, (ep - 0.2*state.environment_pressure)*100);
+  document.getElementById('s-pnl').textContent = pnl.toFixed(1);
+}
+
+function appendMsg(role, text, options) {
+  const chat = document.getElementById('chat');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + (role === 'user' ? 'user' : 'assistant');
+
+  const av = document.createElement('div');
+  av.className = 'avatar ' + (role === 'user' ? 'you' : 'ai');
+  av.textContent = role === 'user' ? 'YOU' : 'AI';
+
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  bub.textContent = text;
+
+  if (options && options.length) {
+    const optDiv = document.createElement('div');
+    optDiv.className = 'options';
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = opt;
+      btn.onclick = () => {
+        document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+        btn.classList.add('selected');
+        document.getElementById('user-input').value = opt;
+        sendMessage();
+      };
+      optDiv.appendChild(btn);
+    });
+    bub.appendChild(optDiv);
+  }
+
+  wrap.appendChild(av);
+  wrap.appendChild(bub);
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+  return bub;
+}
+
+function showTyping() {
+  const chat = document.getElementById('chat');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg assistant';
+  wrap.id = 'typing-wrap';
+
+  const av = document.createElement('div');
+  av.className = 'avatar ai';
+  av.textContent = 'AI';
+
+  const bub = document.createElement('div');
+  bub.className = 'bubble typing';
+  bub.innerHTML = '<span></span><span></span><span></span>';
+
+  wrap.appendChild(av);
+  wrap.appendChild(bub);
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-wrap');
+  if (el) el.remove();
+}
+function updateTypingText(msg) {
+  const el = document.getElementById('typing-wrap');
+  if (el) el.querySelector('.bubble').textContent = msg;
+}
+
+// ── Parse state from assistant text ──────────────────────────────────────
+function tryParseState(text) {
+  const fields = {
+    info_quality: /info_quality\s*[:\=]\s*([\d.]+)/i,
+    adaptability: /adaptability\s*[:\=]\s*([\d.]+)/i,
+    authority_concentration: /authority_concentration\s*[:\=]\s*([\d.]+)/i,
+    alignment: /alignment\s*[:\=]\s*([\d.]+)/i,
+    constraint_capacity: /constraint_capacity\s*[:\=]\s*([\d.]+)/i,
+    environment_pressure: /environment_pressure\s*[:\=]\s*([\d.]+)/i,
+  };
+  let found = 0;
+  const s = {};
+  for (const [k, rx] of Object.entries(fields)) {
+    const m = text.match(rx);
+    if (m) { s[k] = parseFloat(m[1]); found++; }
+  }
+  if (found >= 4) return s;
+  return null;
+}
+
+// ── Parse options from assistant text ────────────────────────────────────
+function tryParseOptions(text) {
+  // Look for numbered or lettered options
+  const lines = text.split('\n');
+  const opts = [];
+  for (const line of lines) {
+    const m = line.match(/^[\s]*[A-C1-3][.)]\s+(.+)/);
+    if (m) opts.push(m[1].trim());
+  }
+  return opts.length >= 2 ? opts : [];
+}
+
+// ── API call (Groq — OpenAI-compatible) with rate-limit retry ─────────────
+async function callAPI(msgs) {
+  if (!API_KEY) throw new Error("No API key — paste your Groq key above and press Set.");
+
+  const recent = msgs.slice(-10);
+  const messages = [
+    { role: 'system', content: SYSTEM },
+    ...recent,
+  ];
+
+  const body = JSON.stringify({
+    model: MODEL,
+    messages,
+    max_tokens: 8192,
+    temperature: 0.7,
+  });
+
+  const MAX_RETRIES = 4;
+  let delay = 5000;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`,
+      },
+      body,
+    });
+
+    if (res.status === 429) {
+      if (attempt === MAX_RETRIES) throw new Error("Rate limit reached. Please wait a minute and try again.");
+      const retryAfter = parseInt(res.headers.get('Retry-After') || '0') * 1000 || delay;
+      updateTypingText(`Rate limited — retrying in ${Math.round(retryAfter/1000)}s…`);
+      await new Promise(r => setTimeout(r, retryAfter));
+      delay = Math.min(delay * 2, 60000);
+      continue;
+    }
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`API error ${res.status}: ${err}`);
+    }
+
+    const data = await res.json();
+    const text = data?.choices?.[0]?.message?.content;
+    if (!text) throw new Error("Empty response from API.");
+    return text;
+  }
+}
+
+// ── Send message ──────────────────────────────────────────────────────────
+async function sendMessage() {
+  if (busy) return;
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  appendMsg('user', text);
+  messages.push({ role: 'user', content: text });
+
+  busy = true;
+  document.getElementById('send-btn').disabled = true;
+  showTyping();
+
+  try {
+    const reply = await callAPI(messages);
+    removeTyping();
+    messages.push({ role: 'assistant', content: reply });
+
+    // Try to extract updated state
+    const parsed = tryParseState(reply);
+    if (parsed) { currentState = parsed; updateStateBar(currentState); }
+
+    // Try to extract options for quick-pick buttons
+    const opts = tryParseOptions(reply);
+    appendMsg('assistant', reply, opts);
+
+  } catch (err) {
+    removeTyping();
+    appendMsg('assistant', 'Error: ' + err.message);
+  }
+
+  busy = false;
+  document.getElementById('send-btn').disabled = false;
+  document.getElementById('user-input').focus();
+}
+
+// ── New case ──────────────────────────────────────────────────────────────
+async function newCase() {
+  if (busy) return;
+  messages = [];
+  document.getElementById('chat').innerHTML = '';
+  currentState = null;
+  updateStateBar({
+    info_quality:0, adaptability:0, authority_concentration:0,
+    alignment:0, constraint_capacity:0, environment_pressure:0
+  });
+  document.getElementById('s-info').textContent = '—';
+  document.getElementById('s-adapt').textContent = '—';
+  document.getElementById('s-auth').textContent = '—';
+  document.getElementById('s-align').textContent = '—';
+  document.getElementById('s-cap').textContent = '—';
+  document.getElementById('s-press').textContent = '—';
+  document.getElementById('s-pnl').textContent = '—';
+
+  // Seed the first message
+  const seed = { role: 'user', content: 'Start a new case. Give me a realistic organisational crisis scenario with a starting state, then ask me the first decision.' };
+  messages.push(seed);
+
+  busy = true;
+  document.getElementById('send-btn').disabled = true;
+  showTyping();
+
+  try {
+    const reply = await callAPI(messages);
+    removeTyping();
+    messages.push({ role: 'assistant', content: reply });
+    const parsed = tryParseState(reply);
+    if (parsed) { currentState = parsed; updateStateBar(currentState); }
+    const opts = tryParseOptions(reply);
+    appendMsg('assistant', reply, opts);
+  } catch (err) {
+    removeTyping();
+    appendMsg('assistant', 'Error connecting: ' + err.message + '\n\nCheck that the API key is valid and CORS is allowed.');
+  }
+
+  busy = false;
+  document.getElementById('send-btn').disabled = false;
+}
+
+// ── Enter key ─────────────────────────────────────────────────────────────
+document.getElementById('user-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+// Auto-resize textarea
+document.getElementById('user-input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+});
+
+// ── Auto-detect model ─────────────────────────────────────────────────────
+async function detectModel() {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`
+  );
+  if (!res.ok) throw new Error(`Key check failed: ${res.status}`);
+  const data = await res.json();
+  // pick first model that supports generateContent
+  const PREFER = ['gemini-2.0-flash','gemini-1.5-flash','gemini-1.5-pro','gemini-pro'];
+  const available = (data.models || [])
+    .filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
+    .map(m => m.name.replace('models/', ''));
+  for (const p of PREFER) {
+    if (available.find(a => a.startsWith(p))) {
+      return available.find(a => a.startsWith(p));
+    }
+  }
+  if (available.length) return available[0];
+  throw new Error('No generateContent model found for this key.');
+}
+
+// ── Set key ───────────────────────────────────────────────────────────────
+async function setKey() {
+  const val = document.getElementById('key-input').value.trim();
+  if (!val) return;
+  API_KEY = val;
+  MODEL = document.getElementById('model-input').value.trim() || 'gemini-3.5-flash';
+  document.getElementById('key-input').value = '';
+  document.getElementById('key-ok').textContent = `✓ ${MODEL}`;
+  document.getElementById('key-ok').style.color = '#35cc83';
+  document.getElementById('key-ok').style.display = 'inline';
+  newCase();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('key-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); setKey(); }
+  });
+});
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+window.onload = () => {
+  appendMsg('assistant', 'Paste your OpenAI API key above and press Set to start a case.');
+};
+</script>
+</body>
+</html>
